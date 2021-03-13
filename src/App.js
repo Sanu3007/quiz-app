@@ -12,7 +12,6 @@ function App() {
     index,
     correct,
     nextQuestion,
-    prevQuestion,
     checkQuestion,
     submitAnswers,
     setError,

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 
 const table = {
-  Sports: 21,
-  History: 23,
+  sports: 21,
+  history: 23,
   ComputerScience: 18,
   GeneralKnowledge: 9,
   Gadgets: 30,
@@ -34,7 +34,8 @@ const AppProvider = ({ children }) => {
 
   // Next question
   const nextQuestion = (e) => {
-    e.target.style.backgroundColor = setIndex((oldIndex) => {
+    setIndex((oldIndex) => {
+      // if (oldIndex == questions.length - 1) return oldIndex;
       const index = oldIndex + 1;
       // if (index > questions.length - 1) {
       //   return oldIndex;
@@ -59,15 +60,18 @@ const AppProvider = ({ children }) => {
 
   // check Question
   const checkQuestion = (value, e) => {
-    console.log(e.target);
+    // console.log(e.target);
     // e.target.classList.add("change-btn-color");
     if (value) {
       setCorrect((oldState) => {
         return oldState + 1;
       });
     }
-
-    nextQuestion(e);
+    if (index === questions.length - 1) {
+      openModal();
+    } else {
+      nextQuestion(e);
+    }
   };
 
   // Open Modal
@@ -77,6 +81,7 @@ const AppProvider = ({ children }) => {
 
   // Close Modal
   const closeModal = () => {
+    setIndex(0);
     setCorrect(0);
     setModal(false);
     setWaiting(true);
